@@ -1,5 +1,10 @@
 body {
-  background-color: #f5f5f5
+  background-color: #f5f5f5;
+  background-image: url("http://wallpapercave.com/wp/0HHmUnQ.jpg")
+}
+
+.background {
+  background-image: url("http://wallpapercave.com/wp/0HHmUnQ.jpg")
 }
 
 h1 {
