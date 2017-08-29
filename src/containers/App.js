@@ -7,7 +7,9 @@ class App extends Component {
         name: '',
         gender: '',
         homeworld: '',
-        homeworldURL: ''
+        homeworldURL: '',
+        speciesURL: '',
+        species: ''
       }
       this.handleClick = this.handleClick.bind(this)
     }
@@ -20,15 +22,24 @@ class App extends Component {
         this.setState({
           name: body.name,
           gender: body.gender,
-          homeworldURL: body.homeworld
+          homeworldURL: body.homeworld,
+          speciesURL: body.species
         })
       })
       .then(() => {
-        return fetch(`this.state.homeworldURL`)})
+        return fetch(`${this.state.homeworldURL}`)})
       .then(response => response.json())
       .then(body => {
         this.setState({
           homeworld: body.name
+        })
+      })
+      .then(() => {
+        return fetch(`${this.state.speciesURL}`)})
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          species: body.name
         })
       })
     }
@@ -41,14 +52,24 @@ class App extends Component {
         this.setState({
           name: body.name,
           gender: body.gender,
-          homeworldURL: body.homeworld
+          homeworldURL: body.homeworld,
+          speciesURL: body.species
         })
       })
-      .then(fetch(`this.state.homeworldURL`))
+      .then(() => {
+        return fetch(`${this.state.homeworldURL}`)})
       .then(response => response.json())
       .then(body => {
         this.setState({
           homeworld: body.name
+        })
+      })
+      .then(() => {
+        return fetch(`${this.state.speciesURL}`)})
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          species: body.name
         })
       })
     }
@@ -57,10 +78,12 @@ class App extends Component {
     let name;
     let gender;
     let homeworld;
-    if (this.state.name !== undefined && this.state.gender !== undefined && this.state.homeworld !== undefined) {
+    let species;
+    if (this.state.name !== undefined && this.state.gender !== undefined && this.state.homeworld !== undefined && this.state.species !== undefined) {
       name = this.state.name
       gender = this.state.gender
       homeworld = this.state.homeworld
+      species = this.state.species
     } else {
       name = 'Click the button to get a random character!'
     }
@@ -69,9 +92,10 @@ class App extends Component {
         <div className="row">
           <div className="small-12 large-6 small-centered columns text-center main">
             <h1>Star Wars Characters!</h1>
-            <h3>{name}</h3>
-            <h3>{gender}</h3>
-            <h3>{homeworld}</h3>
+            <h3>Name: {name}</h3>
+            <h3>Gender: {gender}</h3>
+            <h3>Homeworld: {homeworld}</h3>
+            <h3>Species: {species}</h3>
             <button className="button" onClick={this.handleClick}>Check out a new character!</button>
           </div>
         </div>
